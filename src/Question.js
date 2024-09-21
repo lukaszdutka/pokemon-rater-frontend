@@ -13,6 +13,12 @@ function Question() {
       });
   }, []);
 
+  const capitalizeFirstLetter = name => {
+    if (!name) return '';
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
+
+
   const handleAnswer = (winnerPokemonId) => {
     axios.post('https://poke-backend.drogaprogramisty.site/answer', {
       id: question.id,
@@ -34,7 +40,7 @@ function Question() {
     <div className="bg-gray-800 text-center py-12">
       <h1 className="text-white text-2xl">Which one is cooler?</h1>
       <div className="flex justify-center mt-8">
-        <h2 className="text-white text-xl">{question.firstPokemonName}</h2>
+        <h2 className="text-white text-xl">{capitalizeFirstLetter(question.firstPokemonName)}</h2>
         <div className="mx-5">
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.firstPokemonId}.png`}
@@ -43,7 +49,7 @@ function Question() {
                   onClick={() => handleAnswer(question.firstPokemonId)}>cooler
           </button>
         </div>
-        <h2 className="text-white text-xl">{question.secondPokemonName}</h2>
+        <h2 className="text-white text-xl">{capitalizeFirstLetter(question.secondPokemonName)}</h2>
         <div className="mx-5">
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.secondPokemonId}.png`}
