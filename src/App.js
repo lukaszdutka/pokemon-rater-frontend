@@ -1,60 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+// App.js
+import React, {useState} from 'react';
+import Leaderboard from './Leaderboard';
+import Question from './Question';
 
-function App() {
-  const [question, setQuestion] = useState(null);
-  const [loading, setLoading] = useState(true);
+const App = () => {
+  const [currentPage, setCurrentPage] = useState('home');
 
-  useEffect(() => {
-    axios.get('https://poke-backend.drogaprogramisty.site/question')
-      .then(response => {
-        setQuestion(response.data);
-        setLoading(false);
-      });
-  }, []);
-
-  const handleAnswer = (winnerPokemonId) => {
-    axios.post('https://poke-backend.drogaprogramisty.site/answer', {
-      id: question.id,
-      winnerPokemonId: winnerPokemonId
-    }).then(() => {
-      axios.get('https://poke-backend.drogaprogramisty.site/question')
-        .then(response => {
-          setQuestion(response.data);
-          setLoading(false);
-        });
-    });
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Question/>;
+      case 'leaderboard':
+        return <Leaderboard/>;
+    }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className="bg-gray-800 text-center py-12">
-      <h1 className="text-white text-2xl">Which one is cooler?</h1>
-      <div className="flex justify-center mt-8">
-        <h2 className="text-white text-xl">{question.firstPokemonName}</h2>
-        <div className="mx-5">
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.firstPokemonId}.png`}
-            alt="First Pokemon"/>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded"
-                  onClick={() => handleAnswer(question.firstPokemonId)}>cooler
-          </button>
-        </div>
-        <h2 className="text-white text-xl">{question.secondPokemonName}</h2>
-        <div className="mx-5">
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.secondPokemonId}.png`}
-            alt="Second Pokemon"/>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded"
-                  onClick={() => handleAnswer(question.secondPokemonId)}>cooler
-          </button>
-        </div>
-      </div>
+    <div>
+      <nav>
+        <ul>
+          <li onClick={() => setCurrentPage('home')}>Home</li>
+          <li onClick={() => setCurrentPage('leaderboard')}>Leaderboard</li>
+        </ul>
+      </nav>
+      {renderPage()}
     </div>
   );
-}
+};
 
 export default App;
