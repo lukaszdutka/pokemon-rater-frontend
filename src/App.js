@@ -18,7 +18,11 @@ function App() {
       id: question.id,
       winnerPokemonId: winnerPokemonId
     }).then(() => {
-      // Optionally, reload question or indicate success
+      axios.get('https://poke-backend.drogaprogramisty.site/question')
+        .then(response => {
+          setQuestion(response.data);
+          setLoading(false);
+        });
     });
   };
 
@@ -27,16 +31,26 @@ function App() {
   }
 
   return (
-    <div style={{textAlign: 'center', marginTop: '50px'}}>
-      <h1>Which one is cooler?</h1>
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-        <div style={{margin: '0 20px'}}>
-          <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.firstPokemonId}.png`} alt="First Pokemon"/>
-          <button onClick={() => handleAnswer(question.firstPokemonId)}>cooler</button>
+    <div className="bg-gray-800 text-center py-12">
+      <h1 className="text-white text-2xl">Which one is cooler?</h1>
+      <div className="flex justify-center mt-8">
+        <h2 className="text-white text-xl">{question.firstPokemonName}</h2>
+        <div className="mx-5">
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.firstPokemonId}.png`}
+            alt="First Pokemon"/>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded"
+                  onClick={() => handleAnswer(question.firstPokemonId)}>cooler
+          </button>
         </div>
-        <div style={{margin: '0 20px'}}>
-          <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.secondPokemonId}.png`} alt="Second Pokemon"/>
-          <button onClick={() => handleAnswer(question.secondPokemonId)}>cooler</button>
+        <h2 className="text-white text-xl">{question.secondPokemonName}</h2>
+        <div className="mx-5">
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.secondPokemonId}.png`}
+            alt="Second Pokemon"/>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded"
+                  onClick={() => handleAnswer(question.secondPokemonId)}>cooler
+          </button>
         </div>
       </div>
     </div>
