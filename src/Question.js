@@ -39,9 +39,9 @@ function Question() {
   return (
     <div className="bg-gray-800 text-center py-12">
       <h1 className="text-white text-2xl">Which one is cooler?</h1>
-      <div className="flex justify-center mt-8">
-        <h2 className="text-white text-xl">{capitalizeFirstLetter(question.firstPokemonName)}</h2>
-        <div className="mx-5">
+      <div className="flex justify-center mt-8 p-4">
+        <div className="border border-gray-500 rounded p-4 mx-2">
+          <h2 className="text-white text-xl">{capitalizeFirstLetter(question.firstPokemonName)}</h2>
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.firstPokemonId}.png`}
             alt="First Pokemon"/>
@@ -49,8 +49,8 @@ function Question() {
                   onClick={() => handleAnswer(question.firstPokemonId)}>cooler
           </button>
         </div>
-        <h2 className="text-white text-xl">{capitalizeFirstLetter(question.secondPokemonName)}</h2>
-        <div className="mx-5">
+        <div className="border border-gray-500 rounded p-4 mx-2">
+          <h2 className="text-white text-xl">{capitalizeFirstLetter(question.secondPokemonName)}</h2>
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.secondPokemonId}.png`}
             alt="Second Pokemon"/>

@@ -19,12 +19,12 @@ const App = () => {
     <div className="bg-gray-800 min-h-screen text-white">
       <nav className="flex justify-between items-center p-4">
         <ul className="flex space-x-4">
-          <li className="cursor-pointer bg-gray-200 hover:bg-gray-300"
-              onClick={() => setCurrentPage('home')}>Home
-          </li>
-          <li className="cursor-pointer bg-gray-200 hover:bg-gray-300"
-              onClick={() => setCurrentPage('leaderboard')}>Leaderboard
-          </li>
+          <button className="cursor-pointer bg-gray-200 hover:bg-gray-300 p-2 rounded text-black font-bold"
+                  onClick={() => setCurrentPage('home')}>Home
+          </button>
+          <button className="cursor-pointer bg-gray-200 hover:bg-gray-300 p-2 rounded text-black font-bold"
+                  onClick={() => setCurrentPage('leaderboard')}>Leaderboard
+          </button>
         </ul>
       </nav>
       {renderPage()}
