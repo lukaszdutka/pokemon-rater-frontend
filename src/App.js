@@ -14,7 +14,7 @@ function App() {
   }, []);
 
   const handleAnswer = (winnerPokemonId) => {
-    axios.post('/answer', {
+    axios.post('https://poke-backend.drogaprogramisty.site/answer', {
       id: question.id,
       winnerPokemonId: winnerPokemonId
     }).then(() => {
@@ -32,11 +32,11 @@ function App() {
       <div style={{display: 'flex', justifyContent: 'center'}}>
         <div style={{margin: '0 20px'}}>
           <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.firstPokemonId}.png`} alt="First Pokemon"/>
-          <button onClick={() => handleAnswer(question.firstPokemonId)}>This one is cooler</button>
+          <button onClick={() => handleAnswer(question.firstPokemonId)}>cooler</button>
         </div>
         <div style={{margin: '0 20px'}}>
           <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${question.secondPokemonId}.png`} alt="Second Pokemon"/>
-          <button onClick={() => handleAnswer(question.secondPokemonId)}>This one is cooler</button>
+          <button onClick={() => handleAnswer(question.secondPokemonId)}>cooler</button>
         </div>
       </div>
     </div>
